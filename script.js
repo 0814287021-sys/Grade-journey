@@ -22,6 +22,40 @@ function renameAssignment3() {
     }
 }
 
+function handleClassSelection() {
+    let classDropdown = document.getElementById("classSelect");
+    let selectedValue = classDropdown.value;
+    
+    if (selectedValue === "custom") {
+        let customClass = prompt("Enter your custom class name:");
+        
+        if (customClass) {
+            // Create a new option with the custom name
+            let newOption = document.createElement("option");
+            newOption.value = customClass;
+            newOption.innerText = customClass;
+            newOption.selected = true;
+            
+            // Add it before "Create Own"
+            let createOwnOption = classDropdown.options[classDropdown.options.length - 1];
+            classDropdown.insertBefore(newOption, createOwnOption);
+            
+            console.log("Custom class created: " + customClass);
+        } else {
+            // Reset to "Select Class" if they cancel
+            classDropdown.value = "";
+        }
+    } else if (selectedValue) {
+        console.log("Selected class: " + selectedValue);
+    }
+}
+
+// Connect the dropdown to the function
+let classDropdown = document.getElementById("classSelect");
+classDropdown.addEventListener("change", handleClassSelection);
+
+
+
 // Connect each box to its function
 let box1 = document.getElementById("assignment1");
 box1.addEventListener("click", renameAssignment1);
